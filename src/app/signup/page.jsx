@@ -1,54 +1,37 @@
 "use client"
 
-import { useState } from "react"
-import { supabase } from "@/lib/supabaseClient"
-import { useRouter } from "next/navigation"
+import { GalleryVerticalEnd } from "lucide-react"
+
+import { SignupForm } from "@/components/signup-form"
 
 export default function SignupPage() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [error, setError] = useState("")
-  const router = useRouter()
-
-  const handleSignup = async () => {
-    const { error } = await supabase.auth.signUp({ email, password })
-    if (error) return setError(error.message)
-    router.push("/dashboard")
-  }
-
-  const handleGoogleLogin = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: `${window.location.origin}/dashboard`,
-      },
-    })
-  }
 
   return (
-    <div className="max-w-md mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">Create Account</h1>
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className="w-full p-2 border mb-2"
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        className="w-full p-2 border mb-2"
-      />
-      <button onClick={handleSignup} className="w-full bg-black text-white p-2">
-        Sign Up
-      </button>
-      <button onClick={handleGoogleLogin} className="w-full mt-3 bg-red-500 text-white p-2">
-        Continue with Google
-      </button>
-      {error && <p className="text-red-500 mt-2">{error}</p>}
-    </div>
+    <>
+      <div className="grid min-h-svh lg:grid-cols-2">
+        <div className="flex flex-col gap-4 p-6 md:p-10">
+          <div className="flex justify-center gap-2 md:justify-start">
+            <a href="#" className="flex items-center gap-2 font-medium">
+              <div className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
+                <GalleryVerticalEnd className="size-4" />
+              </div>
+              SubscribeMyAI
+            </a>
+          </div>
+          <div className="flex flex-1 items-center justify-center">
+            <div className="w-full max-w-xs">
+              <SignupForm />
+            </div>
+          </div>
+        </div>
+        <div className="bg-muted relative hidden lg:block">
+          <img
+            src="/placeholder.svg"
+            alt="Image"
+            className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+          />
+        </div>
+      </div>
+    </>
   )
 }
