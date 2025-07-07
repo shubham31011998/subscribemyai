@@ -9,7 +9,6 @@ import { Label } from "@/components/ui/label"
 
 export function SignupForm({
     className,
-    ...props
 }: React.ComponentProps<"form">) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -37,6 +36,7 @@ export function SignupForm({
                 <p className="text-muted-foreground text-sm text-balance">
                     Enter your email below to signup to your account
                 </p>
+                {error && <small className="text-red-500">{error}</small>}
             </div>
             <div className="grid gap-6">
                 <div className="grid gap-3">

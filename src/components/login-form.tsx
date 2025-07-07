@@ -9,7 +9,6 @@ import { Label } from "@/components/ui/label"
 
 export function LoginForm({
   className,
-  ...props
 }: React.ComponentProps<"form">) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -31,6 +30,7 @@ export function LoginForm({
         <p className="text-muted-foreground text-sm text-balance">
           Enter your email below to login to your account
         </p>
+        <small>{error}</small>
       </div>
       <div className="grid gap-6">
         <div className="grid gap-3">
