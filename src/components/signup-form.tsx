@@ -21,6 +21,7 @@ export function SignupForm({
 
     const handleSignup = async () => {
         const { error } = await supabase.auth.signUp({ email, password })
+        console.log(name);
         if (error) return setError(error.message)
         router.push("/dashboard")
     }
