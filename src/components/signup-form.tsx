@@ -12,12 +12,20 @@ export function SignupForm({
 }: React.ComponentProps<"form">) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [name, setName] = useState("")
+    const [displayName, setDisplayName] = useState("")
     const [error, setError] = useState("")
     const router = useRouter();
 
     const handleSignup = async () => {
-        const { error } = await supabase.auth.signUp({ email, password })
+        const { error } = await supabase.auth.signUp({
+            email,
+            password,
+            options: {
+                data: {
+                    displayName,
+                },
+            },
+        })
         console.log(name);
         if (error) return setError(error.message)
         router.push("/dashboard")
@@ -43,7 +51,7 @@ export function SignupForm({
             <div className="grid gap-6">
                 <div className="grid gap-3">
                     <Label htmlFor="email">Name</Label>
-                    <Input id="name" type="text" placeholder="Jhon Doe" onChange={(e) => setName(e.target.value)} required />
+                    <Input id="name" type="text" placeholder="Jhon Doe" onChange={(e) => setDisplayName(e.target.value)} required />
                 </div>
                 <div className="grid gap-3">
                     <Label htmlFor="email">Email</Label>
