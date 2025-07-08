@@ -6,9 +6,6 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import {
-  FormDescription
-} from "@/components/ui/form"
 
 export function SignupForm({
     className,
@@ -41,7 +38,7 @@ export function SignupForm({
                 <p className="text-muted-foreground text-sm text-balance">
                     Let's get started. Fill in the details below to create your account.
                 </p>
-                {error && <small className="text-red-500">{error}</small>}
+                <small>{error}</small>
             </div>
             <div className="grid gap-6">
                 <div className="grid gap-3">
