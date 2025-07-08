@@ -6,12 +6,16 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import {
+  FormDescription
+} from "@/components/ui/form"
 
 export function SignupForm({
     className,
 }: React.ComponentProps<"form">) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [name, setName] = useState("")
     const [error, setError] = useState("")
     const router = useRouter();
 
@@ -32,13 +36,17 @@ export function SignupForm({
     return (
         <div className={cn("flex flex-col gap-6", className)}>
             <div className="flex flex-col items-center gap-2 text-center">
-                <h1 className="text-2xl font-bold">Signup for new account</h1>
+                <h1 className="text-2xl font-bold">Create an account</h1>
                 <p className="text-muted-foreground text-sm text-balance">
-                    Enter your email below to signup to your account
+                    Let's get started. Fill in the details below to create your account.
                 </p>
                 {error && <small className="text-red-500">{error}</small>}
             </div>
             <div className="grid gap-6">
+                <div className="grid gap-3">
+                    <Label htmlFor="email">Name</Label>
+                    <Input id="name" type="text" placeholder="Jhon Doe" onChange={(e) => setName(e.target.value)} required />
+                </div>
                 <div className="grid gap-3">
                     <Label htmlFor="email">Email</Label>
                     <Input id="email" type="email" placeholder="m@example.com" onChange={(e) => setEmail(e.target.value)} required />
@@ -46,14 +54,11 @@ export function SignupForm({
                 <div className="grid gap-3">
                     <div className="flex items-center">
                         <Label htmlFor="password">Password</Label>
-                        <a
-                            href="#"
-                            className="ml-auto text-sm underline-offset-4 hover:underline"
-                        >
-                            Forgot your password?
-                        </a>
                     </div>
-                    <Input id="password" type="password" onChange={(e) => setPassword(e.target.value)} required />
+                    <Input id="password" type="password" placeholder="Enter Password" onChange={(e) => setPassword(e.target.value)} required />
+                    <p className="text-muted-foreground text-sm">
+                        Minimum 8 characters.
+                    </p>
                 </div>
                 <Button onClick={handleSignup} className="w-full">
                     Signup
@@ -70,7 +75,7 @@ export function SignupForm({
                             fill="currentColor"
                         />
                     </svg>
-                    Login with Google
+                    Signup with Google
                 </Button>
             </div>
             <div className="text-center text-sm">
